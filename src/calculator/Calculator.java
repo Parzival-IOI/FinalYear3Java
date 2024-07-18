@@ -24,7 +24,7 @@ public class Calculator {
         JButton minus = new JButton("-");
         JButton multiply = new JButton("x");
         JButton divide = new JButton("/");
-        JButton equal = new JButton("=");
+        JButton modular = new JButton("%");
         JButton clear = new JButton("CLEAR");
 
         n1.setVerticalAlignment(SwingConstants.CENTER);
@@ -42,7 +42,7 @@ public class Calculator {
 
         plus.setBounds(5, 180, 190, 55);
         multiply.setBounds(5, 240, 190, 55);
-        equal.setBounds(5, 300, 190, 55);
+        modular.setBounds(5, 300, 190, 55);
 
 
         num1.setBounds(200, 5, 180, 55);
@@ -63,56 +63,79 @@ public class Calculator {
         f.add(minus);
         f.add(multiply);
         f.add(divide);
-        f.add(equal);
+        f.add(modular);
         f.add(clear);
 
-        plus.addActionListener(e -> arithmetic = plus.getText());
+        plus.addActionListener(e -> {
+            try {
+                double input1 = Double.parseDouble(num1.getText());
+                double input2 = Double.parseDouble(num2.getText());
 
-        minus.addActionListener(e -> arithmetic = minus.getText());
+                String response = Double.toString(input1 + input2);
+                result.setText(response);
 
-        multiply.addActionListener(e -> arithmetic = multiply.getText());
+            } catch (Exception error) {
+                result.setText("Error!");
+            }
+        });
 
-        divide.addActionListener(e -> arithmetic = divide.getText());
+        minus.addActionListener(e -> {
+            try {
+                double input1 = Double.parseDouble(num1.getText());
+                double input2 = Double.parseDouble(num2.getText());
+
+                String response = Double.toString(input1 - input2);
+                result.setText(response);
+
+            } catch (Exception error) {
+                result.setText("Error!");
+            }
+        });
+
+        multiply.addActionListener(e -> {
+            try {
+                double input1 = Double.parseDouble(num1.getText());
+                double input2 = Double.parseDouble(num2.getText());
+
+                String response = Double.toString(input1 * input2);
+                result.setText(response);
+
+            } catch (Exception error) {
+                result.setText("Error!");
+            }
+        });
+
+        divide.addActionListener(e -> {
+            try {
+                double input1 = Double.parseDouble(num1.getText());
+                double input2 = Double.parseDouble(num2.getText());
+
+                String response = Double.toString(input1 / input2);
+                result.setText(response);
+
+            } catch (Exception error) {
+                result.setText("Error!");
+            }
+        });
+
+        modular.addActionListener(e -> {
+            try {
+                double input1 = Double.parseDouble(num1.getText());
+                double input2 = Double.parseDouble(num2.getText());
+
+                String response = Double.toString(input1 % input2);
+                result.setText(response);
+
+            } catch (Exception error) {
+                result.setText("Error!");
+            }
+        });
 
         clear.addActionListener(e -> {
             arithmetic = "";
             num1.setText("");
             num2.setText("");
             result.setText("");
-        });
-
-        equal.addActionListener(e -> {
-            try {
-                double input1 = Double.parseDouble(num1.getText());
-                double input2 = Double.parseDouble(num2.getText());
-
-                switch(arithmetic) {
-                    case "+": {
-                        String response = Double.toString(input1 + input2);
-                        result.setText(response);
-                        break;
-                    }
-                    case "-": {
-                        String response = Double.toString(input1 - input2);
-                        result.setText(response);
-                        break;
-                    }
-                    case "x": {
-                        String response = Double.toString(input1 * input2);
-                        result.setText(response);
-                        break;
-                    }
-                    case "/": {
-                        String response = Double.toString(input1 / input2);
-                        result.setText(response);
-                        break;
-                    }
-                    default: throw new Exception("Error Arithmetic");
-                }
-
-            } catch (Exception error) {
-                result.setText("Error!");
-            }
         });
 
         f.setSize(400,400);
